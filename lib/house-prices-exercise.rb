@@ -2,6 +2,7 @@ require 'date'
 
 # A hash of all house prices and transactions
 # Data from the Land Registry and transformed through Postcodes.io
+
 @house_details ={["Basingstoke and Deane", "Tadley South"]=>
   {:count=>1,
    :average=>94000,
@@ -95,7 +96,7 @@ def get_dates
   @dates = []
   i = 0
   @house_details.each do |key, value|
-    @dates << value[:transactions][0][2]
+    @dates << value[:transactions][0][2].day.to_s + " " + Date::MONTHNAMES[value[:transactions][0][2].month-1] + " " +value[:transactions][0][2].year.to_s
     i += 1
   end
   return @dates
