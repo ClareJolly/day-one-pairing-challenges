@@ -101,7 +101,12 @@ def get_dates
   return @dates
 end
 
-puts get_districts
-puts get_wards
-puts get_prices
-puts get_dates
+def output
+  i = 0
+  while i < get_districts.length
+    puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
+    i += 1
+  end
+end
+
+output
