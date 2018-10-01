@@ -66,6 +66,12 @@ require 'date'
       "SP10 1JG",
       Date.parse("1995-06-23")]]}}
 
+def user_input
+  puts "Enter a district or ward"
+  user_search = gets.chomp
+  output(user_search)
+end
+
 def get_districts
   @districts = []
   @house_details.each do |key, value|
@@ -102,7 +108,7 @@ def get_dates
   return @dates
 end
 
-def output
+def output_all
   i = 0
   while i < get_districts.length
     puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
@@ -110,4 +116,13 @@ def output
   end
 end
 
-output
+def output(lookup)
+  #puts get_districts.each_index.select { |index| get_districts[index] == lookup}
+  filter_arr = get_districts.each_index.select { |index| get_districts[index] == lookup}
+  filter_arr.each do |i|
+    puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
+    #i += 1
+  end
+end
+
+user_input
