@@ -69,7 +69,7 @@ require 'date'
 def user_input
   puts "Enter a district or ward"
   user_search = gets.chomp
-  output(user_search)
+  filter(user_search)
 end
 
 def get_districts
@@ -116,10 +116,20 @@ def output_all
   end
 end
 
-def output(lookup)
-  #puts get_districts.each_index.select { |index| get_districts[index] == lookup}
-  filter_arr = get_districts.each_index.select { |index| get_districts[index] == lookup}
-  filter_arr.each do |i|
+def filter(lookup)
+  @filtered_districts = get_districts.each_index.select { |index| get_districts[index].downcase == lookup.downcase}
+  @filtered_wards = get_wards.each_index.select { |index| get_wards[index].downcase == lookup.downcase}
+  if @filtered_districts.empty? && @filtered_wards.empty?
+    puts "No results"
+  elsif !@filtered_districts.empty?
+    output(@filtered_districts)
+  elsif !@filtered_wards.empty?
+    output(@filtered_wards)
+  end
+end
+
+def output(filter)
+  filter.each do |i|
     puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
     #i += 1
   end
