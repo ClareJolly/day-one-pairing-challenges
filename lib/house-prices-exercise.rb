@@ -81,5 +81,27 @@ def get_wards
   return @wards
 end
 
+def get_prices
+  @prices = []
+  i = 0
+  @house_details.each do |key, value|
+    @prices << value[:average]
+    i += 1
+  end
+  return @prices
+end
+
+def get_dates
+  @dates = []
+  i = 0
+  @house_details.each do |key, value|
+    @dates << value[:transactions][0][2]
+    i += 1
+  end
+  return @dates
+end
+
 puts get_districts
 puts get_wards
+puts get_prices
+puts get_dates
