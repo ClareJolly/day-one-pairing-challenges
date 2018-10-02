@@ -66,75 +66,17 @@ require 'date'
       "SP10 1JG",
       Date.parse("1995-06-23")]]}}
 
-def user_input
-  puts "Enter a district or ward"
-  user_search = gets.chomp
-  filter(user_search)
+def districts
+  array = []
+  #array = ["Basingstoke and Deane", "Camden", "Conwy", "Luton", "Melton", "Sheffield", "Stratford-on-Avon", "Sunderland", "Taunton Deane", "Test Valley"]
+  @house_details.each { |key,value| array << key[0]}
+  return array
 end
 
-def get_districts
-  @districts = []
-  @house_details.each do |key, value|
-    @districts << key[0]
-  end
-  return @districts
+def wards
+  ward_arr = []
+  @house_details.each { |key, value| ward_arr << key[1]}
+  return ward_arr
 end
 
-#puts get_districts
-
-def get_wards
-  @wards = []
-  @house_details.each do |key, value|
-    @wards << key[1]
-  end
-  return @wards
-end
-
-def get_prices
-  @prices = []
-  i = 0
-  @house_details.each do |key, value|
-    @prices << value[:average]
-    i += 1
-  end
-  return @prices
-end
-
-def get_dates
-  @dates = []
-  i = 0
-  @house_details.each do |key, value|
-    @dates << value[:transactions][0][2].day.to_s + " " + Date::MONTHNAMES[value[:transactions][0][2].month-1] + " " +value[:transactions][0][2].year.to_s
-    i += 1
-  end
-  return @dates
-end
-
-def output_all
-  i = 0
-  while i < get_districts.length
-    puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
-    i += 1
-  end
-end
-
-def filter(lookup)
-  @filtered_districts = get_districts.each_index.select { |index| get_districts[index].downcase == lookup.downcase}
-  @filtered_wards = get_wards.each_index.select { |index| get_wards[index].downcase == lookup.downcase}
-  if @filtered_districts.empty? && @filtered_wards.empty?
-    puts "No results"
-  elsif !@filtered_districts.empty?
-    output(@filtered_districts)
-  elsif !@filtered_wards.empty?
-    output(@filtered_wards)
-  end
-end
-
-def output(filter)
-  filter.each do |i|
-    puts "A house was sold in #{get_districts[i]}, #{get_wards[i]} for #{get_prices[i]} on #{get_dates[i]}"
-    #i += 1
-  end
-end
-
-# user_input
+#districts

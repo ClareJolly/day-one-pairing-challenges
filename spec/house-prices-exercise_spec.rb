@@ -1,7 +1,7 @@
-require "house-prices-exercise"
+require "house-prices-exercise.rb"
 
-describe "increase_value_by_1" do
-  it "returns { a: 2, b: 3 } when passed { a: 1, b: 2 }" do
-    expect(increase_value_by_1({ a: 1, b: 2 })).to eq ({ a: 2, b: 3 })
+describe "display the districts" do
+  it "returns the list of districts" do
+    expect(get_districts).to eq (["Basingstoke and Deane", "Camden", "Conwy", "Luton", "Melton", "Sheffield", "Stratford-on-Avon", "Sunderland", "Taunton Deane", "Test Valley"])
   end
 end
